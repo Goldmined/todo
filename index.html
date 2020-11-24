@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список дел</title>
+</head>
+<body>
+    <form action="" class="todo-form">
+        <input name="todo" type="text" class="todo-text">
+        <button class="todo-button" type="submit">Добавить</button>
+    </form>
+    <ul class="todo-list"></ul>
+    <script>
+      // объявление переменных
+      // input, button, list
+      var inputEl = document.querySelector('.todo-text');
+      var buttonEl = document.querySelector('.todo-button');
+      var listEl = document.querySelector('.todo-list');
+
+      // описание функций
+      // добавление задачи
+      function addTodo(event) {
+        event.preventDefault();
+        if(inputEl.value === '') {
+          return;
+        }
+        var todoEl = document.createElement("li");
+        todoEl.innerText = inputEl.value;
+        listEl.appendChild(todoEl);
+        inputEl.value = "";
+      }
+
+      // привязка событий
+      // добавление задачи при клике на кнопку
+      buttonEl.addEventListener("click", addTodo);
+    </script>
+</body>
+</html>
