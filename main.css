@@ -1,5 +1,15 @@
+body {
+    font-family: 'Nothing You Could Do', cursive;
+    color: #27300f;
+    font-size: 30px;
+}
+
 .wrapper{
     margin: 0 auto;
     text-align: center;
     margin-top: 9.37rem;
+}
+ol{
+    font-family: 'Caveat', cursive;
+    /* list-style-type: none; */
 }
