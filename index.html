@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список дел</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
+    </style>
 </head>
 <body>
-    <form action="" class="todo-form">
-        <input name="todo" type="text" class="todo-text">
-        <button class="todo-button" type="submit">Добавить</button>
-    </form>
-    <ul class="todo-list"></ul>
+    <div class="wrapper">
+        <h1 class="todo-title">Todo list</h1>
+        <form action="" class="todo-form">
+            <input name="todo" type="text" class="todo-text">
+            <button class="todo-button" type="submit">Добавить</button>
+        </form>
+        <ol class="todo-list"></ol>
+   </div>
     <script>
       // объявление переменных
       // input, button, list
@@ -26,9 +34,17 @@
           return;
         }
         var todoEl = document.createElement("li");
-        todoEl.innerText = inputEl.value;
+        todoEl.innerHTML = `
+          ${inputEl.value}
+          <i class="todo-remove-btn">X</i>
+        `;
         listEl.appendChild(todoEl);
         inputEl.value = "";
+
+        var removeBtn = todoEl.querySelector(".todo-remove-btn");
+        removeBtn.addEventListener('click', function() {
+          todoEl.remove();
+        });
       }
 
       // привязка событий
