@@ -19,9 +19,13 @@
         var listEl = document.querySelector('.cat-list');
 
         function addCat(event){
-            event.preventDefault()
+            event.preventDefault();
             var width = inputWidthEl.value;
             var height = inputHeightEl.value;
+            if(inputWidthEl.value === '' || inputHeightEl.value === '') {
+              return;
+            }
+            
             // var src = 'https://placekitten.com/' + width + '/' + height;
             var src = `https://placekitten.com/${width}/${height}`;
             var catEl = document.createElement('img');
