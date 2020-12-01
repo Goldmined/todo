@@ -1,0 +1,10 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #27300f;
+    font-size: 30px;
+    background-image: url(./img/pinkbg.jpg);
+}
+.wrapper {
+    text-align: center;
+    margin: 0 auto;
+}

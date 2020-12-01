@@ -4,14 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cat</title>
+    <link rel="stylesheet" type="text/css" href="cats.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+    </style>
 </head>
 <body>
+    <div class="wrapper">
     <form action="" class="cat-form">
         <input type="text" class="cat-width">
         <input type="text" class="cat-height">
         <button class="cat-btn">Добавить</button>
     </form>
     <div class="cat-list"></div>
+   </div>
     <script>
         var inputWidthEl = document.querySelector('.cat-width');
         var inputHeightEl = document.querySelector('.cat-height');
