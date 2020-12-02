@@ -34,10 +34,9 @@
             
             // var src = 'https://placekitten.com/' + width + '/' + height;
             var src = `https://placekitten.com/${width}/${height}`;
-            var catEl = document.createElement('img');
-            catEl.setAttribute('src', src);
+            var catEl = document.createElement('div');
             catEl.innerHTML = `
-             ${inputWidthEl.value} ${inputHeightEl.value}
+             <img src="${src}">
              <i class="cat-remove-btn">X</i>
             `;
             listEl.appendChild(catEl);
@@ -45,10 +44,10 @@
             inputHeightEl.value="";
           
 
-            // var removeBtn = catEl.querySelector(".cat-remove-btn");
-            // removeBtn.addEventListener('click', function() {
-            //     catEl.remove();
-            // });
+            var removeBtn = catEl.querySelector(".cat-remove-btn");
+            removeBtn.addEventListener('click', function() {
+                catEl.remove();
+            });
         }
 
         buttonEl.addEventListener('click', addCat);
