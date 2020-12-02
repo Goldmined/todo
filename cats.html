@@ -12,8 +12,8 @@
 <body>
     <div class="wrapper">
     <form action="" class="cat-form">
-        <input type="text" class="cat cat-width">
-        <input type="text" class="cat cat-height">
+        <input type="text" class="cat-input cat-width">
+        <input type="text" class="cat-input cat-height">
         <button class="cat-btn">Добавить</button>
     </form>
     <div class="cat-list"></div>
@@ -43,11 +43,12 @@
             listEl.appendChild(catEl);
             inputWidthEl.value="";
             inputHeightEl.value="";
+          
 
-            var removeBtn = catEl.querySelector(".cat-remove-btn");
-            removeBtn.addEventListener('click', function() {
-                catEl.remove();
-            });
+            // var removeBtn = catEl.querySelector(".cat-remove-btn");
+            // removeBtn.addEventListener('click', function() {
+            //     catEl.remove();
+            // });
         }
 
         buttonEl.addEventListener('click', addCat);
