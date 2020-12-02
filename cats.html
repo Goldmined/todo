@@ -12,8 +12,8 @@
 <body>
     <div class="wrapper">
     <form action="" class="cat-form">
-        <input type="text" class="cat-width">
-        <input type="text" class="cat-height">
+        <input type="text" class="cat cat-width">
+        <input type="text" class="cat cat-height">
         <button class="cat-btn">Добавить</button>
     </form>
     <div class="cat-list"></div>
@@ -37,7 +37,7 @@
             var catEl = document.createElement('img');
             catEl.setAttribute('src', src);
             catEl.innerHTML = `
-             ${inputWidthEl.value}
+             ${inputWidthEl.value} ${inputHeightEl.value}
              <i class="cat-remove-btn">X</i>
             `;
             listEl.appendChild(catEl);

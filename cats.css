@@ -8,3 +8,21 @@ body {
     text-align: center;
     margin: 0 auto;
 }
+.cat-form{
+    margin: 0;
+}
+.cat{
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+}
+.cat-btn{
+    opacity: 0.8;
+    transition: 0.2s ease;
+    cursor: pointer;
+    color: #27300f;
+    text-align: center;
+    font-size: 15px;
+    padding: 5px 40px;
+    background: #a8709a46;
+    border-radius: 6px;
+}
