@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cat</title>
     <link rel="stylesheet" type="text/css" href="cats.css">
+    <link rel="stylesheet" href="css/overlay.css">
+    <link rel="stylesheet" href="css/modal.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
     </style>
@@ -17,12 +19,22 @@
         <button class="cat-btn">Добавить</button>
     </form>
     <div class="cat-list"></div>
+    <div class="overlay overlay-hidden">
+        <div class="modal overlay__item">
+            <form action="" class="modal__form">
+                <p>Имя кота</p>
+                <input type="text" name="cat" class="modal__input">
+                <button type="submit" class="modal__button">Сохранить</button>
+            </form>
+        </div>
+    </div>
    </div>
     <script>
         var inputWidthEl = document.querySelector('.cat-width');
         var inputHeightEl = document.querySelector('.cat-height');
         var buttonEl = document.querySelector('.cat-btn');
         var listEl = document.querySelector('.cat-list');
+        var overlayEl = document.querySelector('.overlay');
 
         function addCat(event){
             event.preventDefault();
@@ -37,20 +49,30 @@
             var catEl = document.createElement('div');
             catEl.innerHTML = `
              <img src="${src}">
+             <i class="cat-update-btn">U</i>
              <i class="cat-remove-btn">X</i>
             `;
             listEl.appendChild(catEl);
             inputWidthEl.value="";
             inputHeightEl.value="";
           
-
+            var updateBtn = catEl.querySelector(".cat-update-btn");
             var removeBtn = catEl.querySelector(".cat-remove-btn");
+
+            updateBtn.addEventListener('click', function(){
+                overlayEl.classList.remove('overlay_hidden');
+            })
             removeBtn.addEventListener('click', function() {
                 catEl.remove();
             });
         }
 
         buttonEl.addEventListener('click', addCat);
+        overlayEl.addEventListener('click', function(event) {
+            if (event.target.classList.contains('overlay')) {
+                overlayEl.classList.add('overlay_hidden');
+            }
+        })
     </script>
 </body>
 </html>
