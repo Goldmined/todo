@@ -1,0 +1,13 @@
+.modal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+.modal__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__input, .modal__button {
+  margin: 10px 0;
+}

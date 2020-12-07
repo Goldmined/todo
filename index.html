@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список дел</title>
     <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" href="css/overlay.css">
+    <link rel="stylesheet" href="css/modal.css">
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
@@ -15,9 +17,17 @@
         <h1 class="todo-title">Todo list</h1>
         <form action="" class="todo-form">
             <input name="todo" type="text" class="todo-text">
-            <button class="todo-button" type="submit">Добавить</button>
+            <button type="submit" class="todo-button">Добавить</button>
         </form>
         <ol class="todo-list"></ol>
+        <div class="overlay overlay_hidden">
+          <div class="modal overlay__item">
+            <form action="" class="modal__form">
+              <input name="todo" type="text" class="modal__input">
+              <button type="submit" class="modal__button">Сохранить</button>
+            </form>
+          </div>
+        </div>
    </div>
     <script>
       // объявление переменных
@@ -25,6 +35,7 @@
       var inputEl = document.querySelector('.todo-text');
       var buttonEl = document.querySelector('.todo-button');
       var listEl = document.querySelector('.todo-list');
+      var overlayEl = document.querySelector('.overlay');
 
       // описание функций
       // добавление задачи
@@ -36,20 +47,32 @@
         var todoEl = document.createElement("li");
         todoEl.innerHTML = `
           ${inputEl.value}
+          <i class="todo-update-btn">U</i>
           <i class="todo-remove-btn">X</i>
         `;
         listEl.appendChild(todoEl);
         inputEl.value = "";
 
         var removeBtn = todoEl.querySelector(".todo-remove-btn");
+        var updateBtn = todoEl.querySelector(".todo-update-btn");
+
         removeBtn.addEventListener('click', function() {
           todoEl.remove();
         });
+        updateBtn.addEventListener('click', function() {
+          overlayEl.classList.remove('overlay_hidden');
+        });
       }
-
+      
       // привязка событий
       // добавление задачи при клике на кнопку
       buttonEl.addEventListener("click", addTodo);
+      overlayEl.addEventListener("click", function(event){
+          if(event.target.classList.contains('overlay')) {
+            // overlayEl.style.display='none';
+            overlayEl.classList.add('overlay_hidden');
+          }
+      })
     </script>
 </body>
 </html>
