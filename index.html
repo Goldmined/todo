@@ -24,6 +24,7 @@
           <div class="modal overlay__item">
             <form action="" class="modal__form">
               <input name="todo" type="text" class="modal__input">
+              <input name="id" type="hidden" class="modal__hidden">
               <button type="submit" class="modal__button">Сохранить</button>
             </form>
           </div>
@@ -35,7 +36,11 @@
       var inputEl = document.querySelector('.todo-text');
       var buttonEl = document.querySelector('.todo-button');
       var listEl = document.querySelector('.todo-list');
+
       var overlayEl = document.querySelector('.overlay');
+      var modalInputEl = overlayEl.querySelector('.modal__input');
+      var modalHiddenEl = overlayEl.querySelector('.modal__hidden');
+      var modalBtnEl = overlayEl.querySelector('.modal__button');
 
       // описание функций
       // добавление задачи
@@ -45,8 +50,14 @@
           return;
         }
         var todoEl = document.createElement("li");
+        var todoItem = {
+          title: inputEl.value,
+          id: Date.now()
+        }
+        todoEl.setAttribute('data-id', todoItem.id)
+
         todoEl.innerHTML = `
-          ${inputEl.value}
+          <span class="title">${todoItem.title}</span>
           <i class="todo-update-btn">U</i>
           <i class="todo-remove-btn">X</i>
         `;
@@ -61,6 +72,8 @@
         });
         updateBtn.addEventListener('click', function() {
           overlayEl.classList.remove('overlay_hidden');
+          modalInputEl.value = todoEl.querySelector('.title').innerText;
+          modalHiddenEl.value = todoItem.id;
         });
       }
       
@@ -72,6 +85,13 @@
             // overlayEl.style.display='none';
             overlayEl.classList.add('overlay_hidden');
           }
+      })
+      modalBtnEl.addEventListener('click', function(event){
+        event.preventDefault();
+        var todoEl = document.querySelector(`li[data-id="${modalHiddenEl.value}"]`)
+        var spanEl = todoEl.querySelector('.title');
+        spanEl.innerText = modalInputEl.value;
+        overlayEl.classList.add('overlay_hidden');
       })
     </script>
 </body>
