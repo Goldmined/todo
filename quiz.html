@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Quiz</title>
+    <link rel="stylesheet" type="text/css" href="css/quiz.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <H1>Quiz</H1>
+      <div class="results">
+       <hr>
+      </div>
+    </div>
+     <script>
+      const capitals = [
+        {
+          city: "Москва",
+          country: "России",
+        },
+        {
+          city: "Париж",
+          country: "Франции",
+        },
+        {
+          city: "Абу-Даби",
+          country: "ОАЭ",
+        },
+        {
+          city: "Берлин",
+          country: "Германии",
+        },
+      ];
+      // alert("Столица " + capitals[0].country + "?")
+
+      function addResult(question, city, result) {
+        const element = document.createElement('div');
+        element.classList.add('result');
+        element.innerHTML = `
+            <div><b>Вопрос</b>: <span>${question}</span></div>
+            <div><b>Ответ</b>: <span>${city}</span></div>
+            <div><b>Результат</b>: <span>${result}</span></div>
+        `
+        document.querySelector('.results').append(element);
+      }
+
+      function testCapital(capital) {
+        const question = `Столица ${capital.country}?`;
+        const city = prompt(question);
+        // Москва - Москва
+        // москва - Москва
+        // москва - москва
+        if (city.toLowerCase() == capital.city.toLowerCase()) {
+          addResult(question, city, "good");
+          return true;
+        } else {
+          addResult(question, city, "not good");
+          return false;
+        }
+      }
+
+      function scoreView(score) {
+        const scoreElement = document.createElement('div');
+        scoreElement.classList.add('score');
+        scoreElement.innerHTML = `
+            <hr>
+            <div><b>Счет</b>: <span>${score}</span></div>
+            `
+        document.querySelector('.results').append(scoreElement);
+      }
+
+      let score = 0;
+
+      for  (let capital of capitals) {
+        if(testCapital(capital)){
+          score+=1;
+        }
+      }
+      scoreView(`${score}`)
+
+      // const capitals = {
+      //     'Россия': 'Москва',
+      //     'Франция': 'Париж',
+      //     'ОАЭ': 'Абу-Даби'
+      // }
+
+      // const capitals = ['Москва', 'Париж', 'Абу-Даби'];
+      // const countries = ['Россия', 'Франция', 'ОАЭ'];
+    </script>
+  </body>
+</html>
