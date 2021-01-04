@@ -16,7 +16,23 @@
        <hr>
       </div>
     </div>
-     <script>
+    <div class="overlay overlay_hidden">
+      <div class="overlay__modal" id="modal">
+        <form class = "overlay__form" action="">
+          <p class="overlay__question"></p>
+          <input class="overlay__answer" name="answer" type="text">
+          <button class="overlay__button" type="submit">Ответить</button>
+        </form>
+      </div>
+  </div>
+   <script>
+      const overlayEl = document.querySelector('.overlay');
+      const questionEl = document.querySelector('.overlay__question');
+      const formEl = document.querySelector('.overlay__form');
+      const answerEl = document.querySelector('.overlay__answer');
+      let question;
+      let capitalIndex = 0;
+      
       const capitals = [
         {
           city: "Москва",
@@ -30,12 +46,20 @@
           city: "Абу-Даби",
           country: "ОАЭ",
         },
-        {
-          city: "Берлин",
-          country: "Германии",
-        },
+        // {
+        //   city: "Берлин",
+        //   country: "Германии",
+        // },
       ];
       // alert("Столица " + capitals[0].country + "?")
+
+      function showOverlay(question) {
+        overlayEl.classList.remove('overlay_hidden');
+        questionEl.innerText = question
+      }
+      function hideOverlay() {
+        overlayEl.classList.add('overlay_hidden');
+      }
 
       function addResult(question, city, result) {
         const element = document.createElement('div');
@@ -49,18 +73,8 @@
       }
 
       function testCapital(capital) {
-        const question = `Столица ${capital.country}?`;
-        const city = prompt(question);
-        // Москва - Москва
-        // москва - Москва
-        // москва - москва
-        if (city.toLowerCase() == capital.city.toLowerCase()) {
-          addResult(question, city, "good");
-          return true;
-        } else {
-          addResult(question, city, "not good");
-          return false;
-        }
+        question = `Столица ${capital.country}?`;
+        const city = showOverlay(question);
       }
 
       function scoreView(score) {
@@ -68,19 +82,43 @@
         scoreElement.classList.add('score');
         scoreElement.innerHTML = `
             <hr>
-            <div><b>Счет</b>: <span>${score}</span></div>
+            <div><b>Счёт</b>: <span>${score}</span></div>
             `
         document.querySelector('.results').append(scoreElement);
       }
 
       let score = 0;
 
-      for  (let capital of capitals) {
-        if(testCapital(capital)){
+      formEl.addEventListener("submit", function(e){
+        e.preventDefault();
+        const city = answerEl.value;
+        // Москва - Москва
+        // москва - Москва
+        // москва - москва
+        if (city.toLowerCase() == capitals[capitalIndex].city.toLowerCase()) {
+          addResult(question, city, "good");
           score+=1;
+        } else {
+          addResult(question, city, "not good");
         }
-      }
-      scoreView(`${score}`)
+        answerEl.value = "";
+        if(capitalIndex === capitals.length - 1) {
+          hideOverlay()
+          scoreView(`${score}`)
+        } else {
+          capitalIndex+=1;
+          testCapital(capitals[capitalIndex])
+        }
+      })
+
+      testCapital(capitals[capitalIndex])
+
+      // for  (let capital of capitals) {
+      //   if(testCapital(capital)){
+      //     score+=1;
+      //   }
+      // }
+      // scoreView(`${score}`)
 
       // const capitals = {
       //     'Россия': 'Москва',
