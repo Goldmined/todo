@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,10 +25,11 @@
         /* ПЕРЕМЕННЫЕ */
         
         const questionPrefix = "Ответьте на вопрос:";
-        const formEl = document.querySelector(".sbor__form");
-        const questionEl = document.querySelector(".sbor__question");
-        const answerEl = document.querySelector(".sbor__answer");
+        const formEl = document.querySelector('.sbor__form');
+        const questionEl = document.querySelector('.sbor__question');
+        // const answerEl = document.querySelector(".sbor__answer");
         const overlayEl = document.querySelector('.overlay');
+        let index = 0;
 
         const quizArr = [
           {
@@ -64,11 +65,11 @@
         /* ОБЪЯВЛЕНИЯ ФУНКЦИЙ */
         // функции для работы с модальным окном
         function showOverlay(question) {
-        overlayEl.classList.remove('overlay_hidden');
-        questionEl.innerText = question
+        overlayEl.classList.remove('overlay__hidden');
+        questionEl.innerText = question;
         }
         function hideOverlay() {
-        overlayEl.classList.add('overlay_hidden');
+        overlayEl.classList.add('overlay__hidden');
         }
 
 
@@ -86,17 +87,17 @@
 
         function handleSubmit(e) {
             e.preventDefault();
-            const answer = answerEl.value;
+            // const answer = answerEl.value;
             addResult(
                 `${questionPrefix} ${quizArr[index].q}?`,
-                answer,
+                // answer,
             );
             answerEl.value = "";
-            function startTest(){
-                // показ первого вопроса
-                showOverlay(`${questionPrefix}.q}?`)
-                // обработка формы
-                formEl.addEventListener("submit", handleSubmit)
+            if(index === quizArr.length - 1) {
+              hideOverlay()
+            } else {
+              index+=1;
+              showOverlay(`${questionPrefix} ${quizArr[index].q}?`)
             }
         }
 
