@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Анкета</h1>
+        <div class="results">
+            <hr>
+        </div>
+        <div class="overlay overlay__hidden">
+            <div class="overlay__modal">
+            <form action="" class="sbor__form" action="">
+                <p class="sbor__question"></p>
+                <input type="text" class="sbor__answer">
+                <button class="sbor__btn" type="submit">Отправить</button>
+            </form>
+           </div>
+        </div>
+    </div>
+    <script>
+        /* ПЕРЕМЕННЫЕ */
+        
+        const questionPrefix = "Ответьте на вопрос:";
+        const formEl = document.querySelector(".sbor__form");
+        const questionEl = document.querySelector(".sbor__question");
+        const answerEl = document.querySelector(".sbor__answer");
+        const overlayEl = document.querySelector('.overlay');
+
+        const quizArr = [
+          {
+            q: "Как вас зовут?",
+          },
+          {
+            q: "Дата рождения?",
+          },
+          {
+            q: "Страна проживания?",
+          },
+          {
+            q: "Какой ваш любимый цвет?",
+          },
+          {
+            q: "Какой ваш любимый фильм?",
+          },
+          {
+            q: "Кто вы по гороскопу?",
+          },
+          {
+            q: "Кем вы работаете?",
+          },
+          {
+            q: "Какой ваш любимый цвет?",
+          },
+          {
+            q: "Ваша любимая музыка?",
+          },
+        ];
+
+        
+        /* ОБЪЯВЛЕНИЯ ФУНКЦИЙ */
+        // функции для работы с модальным окном
+        function showOverlay(question) {
+        overlayEl.classList.remove('overlay_hidden');
+        questionEl.innerText = question
+        }
+        function hideOverlay() {
+        overlayEl.classList.add('overlay_hidden');
+        }
+
+
+
+        function addResult(question, answer, result) {
+        const element = document.createElement('div');
+        element.innerHTML = `
+            <div><span>${question}</span></div>
+            <div><b>Ответ</b>: <span>${answer}</span></div>
+            <div><b>Результат</b>: <span>${result}</span></div>
+         `
+        document.querySelector('.results').append(element);
+        }
+        
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const answer = answerEl.value;
+            addResult(
+                `${questionPrefix} ${quizArr[index].q}?`,
+                answer,
+            );
+            answerEl.value = "";
+            function startTest(){
+                // показ первого вопроса
+                showOverlay(`${questionPrefix}.q}?`)
+                // обработка формы
+                formEl.addEventListener("submit", handleSubmit)
+            }
+        }
+
+
+        /* ИСПОЛЬЗОВАНИЕ ФУНКЦИЙ */
+        function startTest(){
+            // показ первого вопроса
+            showOverlay(`${questionPrefix} ${quizArr[index].q}?`)
+            // обработка формы
+            formEl.addEventListener("submit", handleSubmit)
+        }
+      </script>
+</body>
+</html>
