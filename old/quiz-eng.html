@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz English</title>
+    <link rel="stylesheet" type="text/css" href="css/quiz.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>English Quiz</h1>
+        <div class="results">
+            <hr>
+        </div>
+        <div class="overlay overlay__hidden">
+            <div class="overlay__modal">
+                <form class = "overlay__form"  action="">
+                    <p class="overlay__question"></p>
+                    <input class="overlay__answer" name="answer" type="text">
+                    <button class="overlay__button" type="submit">Ответить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        /* ПЕРЕМЕННЫЕ */
+        // DOM-элементы
+        const overlayEl = document.querySelector('.overlay');
+        const questionEl = document.querySelector('.overlay__question');
+        const formEl = document.querySelector('.overlay__form');
+        const answerEl = document.querySelector('.overlay__answer');
+        // порядковый номер активного вопроса
+        let wordIndex = 0;
+        // количество очков на текущий момент
+        let score = 0;
+        // база вопросов и ответов
+        const words = [
+          {
+            eng: "Table",
+            rus: "Стол",
+          },
+          {
+            eng: "Chair",
+            rus: "Стул",
+          },
+          {
+            eng: "Pen",
+            rus: "Ручка",
+          },
+          {
+            eng: "Street",
+            rus: "Улица",
+          },
+        ];
+  
+        /* ОБЪЯВЛЕНИЯ ФУНКЦИЙ */
+        // функции для работы с модальным окном
+        function showOverlay(question) {
+          overlayEl.classList.remove('overlay_hidden');
+          questionEl.innerText = question
+        }
+        function hideOverlay() {
+          overlayEl.classList.add('overlay_hidden');
+        }
+  
+        // добавляет на страницу отчёт с результатом
+        function addResult(question, eng, result) {
+          const element = document.createElement('div');
+          element.innerHTML = `
+              <div><span>${question}</span></div>
+              <div><b>Ответ</b>: <span>${eng}</span></div>
+              <div><b>Результат</b>: <span>${result}</span></div>
+          `
+          document.querySelector('.results').append(element);
+        }
+  
+        // отображение на странице результатов теста
+        function scoreView(score) {
+          const scoreElement = document.createElement('div');
+          scoreElement.classList.add('score');
+          scoreElement.innerHTML = `
+              <hr>
+              <div><b>Счёт</b>: <span>${score}</span></div>
+              `
+          document.querySelector('.results').append(scoreElement);
+        }
+  
+        // обработка формы (вызывается после нажатия на кнопку в форме)
+        function handleSubmit(e) {
+          e.preventDefault();
+          const rus = answerEl.value;
+          const isCorrect = rus.toLowerCase() === words[wordIndex].rus.toLowerCase();
+          if (isCorrect) {
+            score+=1;
+          }
+          addResult(
+            `Переведите слово ${words[wordIndex].eng}?`,
+            rus,
+            isCorrect ? "правильно" : "не правильно"
+          );
+          answerEl.value = "";
+          if(wordIndex === words.length - 1) {
+            hideOverlay()
+            scoreView(`${score}`)
+          } else {
+            wordIndex+=1;
+            showOverlay(`Переведите слово ${words[wordIndex].eng}?`)
+          }
+        }
+
+        /* ИСПОЛЬЗОВАНИЕ ФУНКЦИЙ */
+        // показ первого вопроса
+        showOverlay(`Переведите слово ${words[wordIndex].eng}?`)
+        // обработка формы
+        formEl.addEventListener("submit", handleSubmit)
+      </script>
+</body>
+</html>
