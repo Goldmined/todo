@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/quiz.css">
+    <title></title>
 </head>
 <body>
     <div class="wrapper">
@@ -15,7 +16,7 @@
             <div class="overlay__modal">
             <form action="" class="sbor__form" action="">
                 <p class="sbor__question"></p>
-                <input type="text" class="sbor__answer">
+                <input type="text" class="sbor__answer" name="answer" type="text">
                 <button class="sbor__btn" type="submit">Отправить</button>
             </form>
            </div>
@@ -23,74 +24,76 @@
     </div>
     <script>
         /* ПЕРЕМЕННЫЕ */
-        
-        const questionPrefix = "Ответьте на вопрос:";
+        let index = 0;
+        const questionPrefix = " ";
         const formEl = document.querySelector('.sbor__form');
         const questionEl = document.querySelector('.sbor__question');
-        // const answerEl = document.querySelector(".sbor__answer");
+        const answerEl = document.querySelector(".sbor__answer");
         const overlayEl = document.querySelector('.overlay');
-        let index = 0;
+        
 
         const quizArr = [
           {
-            q: "Как вас зовут?",
+            q: "Как вас зовут",
           },
           {
-            q: "Дата рождения?",
+            q: "Дата рождения",
           },
           {
-            q: "Страна проживания?",
+            q: "Страна проживания",
           },
           {
-            q: "Какой ваш любимый цвет?",
+            q: "Какой ваш любимый цвет",
           },
           {
-            q: "Какой ваш любимый фильм?",
+            q: "Какой ваш любимый фильм",
           },
           {
-            q: "Кто вы по гороскопу?",
+            q: "Кто вы по гороскопу",
           },
           {
-            q: "Кем вы работаете?",
+            q: "Кем вы работаете",
           },
           {
-            q: "Какой ваш любимый цвет?",
+            q: "Какой ваш любимый цвет",
           },
           {
-            q: "Ваша любимая музыка?",
+            q: "Ваша любимая музыка",
           },
         ];
-
+        startTest();
         
         /* ОБЪЯВЛЕНИЯ ФУНКЦИЙ */
         // функции для работы с модальным окном
         function showOverlay(question) {
-        overlayEl.classList.remove('overlay__hidden');
-        questionEl.innerText = question;
+          overlayEl.classList.remove('overlay__hidden');
+          questionEl.innerText = question;
         }
         function hideOverlay() {
-        overlayEl.classList.add('overlay__hidden');
+          overlayEl.classList.add('overlay__hidden');
         }
 
 
 
-        function addResult(question, answer, result) {
-        const element = document.createElement('div');
-        element.innerHTML = `
+        function addResult(question, answer) {
+          const element = document.createElement('div');
+          element.innerHTML = `
             <div><span>${question}</span></div>
             <div><b>Ответ</b>: <span>${answer}</span></div>
-            <div><b>Результат</b>: <span>${result}</span></div>
+           
          `
-        document.querySelector('.results').append(element);
+          document.querySelector('.results').append(element);
         }
-        
 
+
+        
+        // обработка формы (вызывается после нажатия на кнопку в форме)
         function handleSubmit(e) {
             e.preventDefault();
-            // const answer = answerEl.value;
+            const answer = answerEl.value;
             addResult(
                 `${questionPrefix} ${quizArr[index].q}?`,
-                // answer,
+                answer,
             );
             answerEl.value = "";
             if(index === quizArr.length - 1) {
