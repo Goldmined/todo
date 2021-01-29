@@ -31,7 +31,11 @@
         const answerEl = document.querySelector(".sbor__answer");
         const overlayEl = document.querySelector('.overlay');
         
-
+        overlayEl.addEventListener('click', function(e) {
+          if(e.target.classList.contains('overlay')){
+            overlayEl.classList.add('overlay__hidden');
+          }
+        })
         const quizArr = [
           {
             q: "Как вас зовут",
