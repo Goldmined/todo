@@ -34,6 +34,7 @@ const persons = [
 ];
 
 for (let obj of persons) {
+
     const person = new Person(obj.name, obj.email);
     console.log(person.sayHello())
     console.log(person.sayEmail())
