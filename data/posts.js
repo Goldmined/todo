@@ -1,4 +1,4 @@
-const users2 = [
+const posts = [
     {
       "userId": 1,
       "id": 1,
@@ -602,5 +602,5 @@ const users2 = [
   ]
 
   module.exports = {
-    "users2": users2
+    "posts": posts
   }

@@ -1,4 +1,4 @@
-const { users } = require('./data/users')
+// const { users } = require('../data/users')
 // 0. Теория
 // https://learn.javascript.ru/object
 // https://learn.javascript.ru/object-copy
@@ -40,17 +40,36 @@ const User = function(object){
     this.sayCompany = function () {
         return `Моя компания ${this.object.company.name}, ключевая фраза: ${this.object.company.catchPhrase}`;
     }
+    this.getElement = function(usersEl) {
+        const userEl = document.createElement("div");
+        userEl.innerHTML = `
+         <h1>${this.object.name}</h1>
+         <p>${this.object.email}</p>
+         <p>${this.object.phone}</p>
+         <a href = "${this.object.website}">${this.object.website}</a>
+        `
+        usersEl.appendChild(userEl);
+        return userEl;
+    }
 }
 
+fetch('https://jsonplaceholder.typicode.com/users') // будет работать на фронтенде
+    .then(function(res){
+        return res.json()
+    })
+    .then(function(users) {
+        for (let obj1 of users) {
+            const userCreated = new User(obj1);
+            userCreated.getElement(usersEl);
 
-for (let obj1 of users) {
-    const userCreated = new User(obj1);
-    console.log(userCreated.sayName());
-    console.log(userCreated.sayPhone());
-    console.log(userCreated.sayAddress());
-    console.log(userCreated.sayPhone());
-    console.log(userCreated.sayWebsite());
-    console.log(userCreated.sayCompany());
-}
+            // console.log(userCreated.sayName());
+            // console.log(userCreated.sayPhone());
+            // console.log(userCreated.sayAddress());
+            // console.log(userCreated.sayPhone());
+            // console.log(userCreated.sayWebsite());
+            // console.log(userCreated.sayCompany());
+        }
+    })
 
-// console.log(users);
+
+const usersEl = document.querySelector(".users");
