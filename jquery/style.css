@@ -1,0 +1,11 @@
+#square {
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
+  transition: 2s;
+}
+
+#square.big {
+  width: 200px;
+  height: 200px;
+}

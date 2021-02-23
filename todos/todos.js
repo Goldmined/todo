@@ -14,7 +14,7 @@ const User = function(obj){
         `
 
         usersEl.appendChild(userEl);
-        return userEl;
+        return userEl;s
     }
 }
 
